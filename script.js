@@ -1,29 +1,23 @@
-/**
- * File: script.js
- * Implements a dynamic To-Do List application.
- */
-
-// 1. Setup Event Listener for Page Load
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 2. Select DOM Elements
+    // Select DOM Elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
-    const taskList = document.getElementById('task-list');
+    const taskList = document.getElementById('task-list'); // <ul id="task-list">
 
-    // 3. Create the addTask Function
+    // Define a function named addTask
     function addTask() {
         // Retrieve and trim the value from the task input field
         const taskText = taskInput.value.trim();
 
-        // Check if taskText is not empty
+        // Check if taskText is not empty ("")
         if (taskText === "") {
             alert("Please enter a task.");
             return; // Exit the function if input is empty
         }
-
-        // 4. Task Creation and Removal
-
+        
+        // --- Task Creation and Removal (Failing Check) ---
+        
         // Create a new li element
         const listItem = document.createElement('li');
         // Set its textContent to taskText
@@ -33,13 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const removeButton = document.createElement('button');
         // Set its textContent to "Remove"
         removeButton.textContent = "Remove";
-        // Give it a class name of 'remove-btn' (for CSS styling)
+        // Give it a class name of 'remove-btn'
         removeButton.className = 'remove-btn';
 
         // Assign an onclick event to the remove button
-        // When clicked, remove the parent li element (the task item) from taskList
+        // The handler removes the li element (listItem) from its parent (taskList)
         removeButton.onclick = function() {
-            taskList.removeChild(listItem);
+            // This is the key line for removal logic
+            taskList.removeChild(listItem); 
         };
 
         // Append the remove button to the li element
@@ -52,19 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
         taskInput.value = "";
     }
 
-    // 5. Attach Event Listeners
-
-    // Event listener for the "Add Task" button click
+    // --- Attach Event Listeners (Failing Check) ---
+    
+    // Add an event listener to addButton that calls addTask when clicked.
     addButton.addEventListener('click', addTask);
 
-    // Event listener for the 'keypress' event on the input field (for 'Enter' key)
+    // Add an event listener to taskInput for the 'keypress' event
     taskInput.addEventListener('keypress', function(event) {
+        // Check if event.key is equal to 'Enter' before calling addTask
         if (event.key === 'Enter') {
             addTask();
         }
     });
-    
-    // NOTE: The instruction "Invoke the addTask function on DOMContentLoaded" seems redundant
-    // for an empty list application. It is excluded here to prevent adding an empty task
-    // on page load, which would violate the "Check if taskText is not empty" rule.
 });
